@@ -8,9 +8,10 @@ import binascii
 
 
 class Wallet:
-    def __init__(self):
+    def __init__(self, node_id):
         self.private_key = None
         self.public_key = None
+        self.id_of_node = node_id
 
 
     def create_keys(self):
@@ -22,7 +23,7 @@ class Wallet:
     def save_keys(self):
         if self.public_key != None and self.private_key != None:
             try:
-                with open('wallet.txt', 'w') as file:
+                with open(f'wallet.txt-{self.id_of_node}', 'w') as file:
                     file.write(self.public_key)
                     file.write('\n')
                     file.write(self.private_key)
@@ -33,7 +34,7 @@ class Wallet:
 
     def load_keys(self):
         try:
-            with open('wallet.txt', 'r') as file:
+            with open(f'wallet.txt-{self.id_of_node}', 'r') as file:
                 keys = file.readlines()
                 public_key = keys[0][:-1]
                 private_key = keys[1]
