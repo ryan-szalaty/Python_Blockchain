@@ -200,7 +200,12 @@ def get_all_nodes():
 
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5000)
+    from argparse import ArgumentParser
+    parser = ArgumentParser()
+    parser.add_argument('-p', '--port', type=int, default=5000)
+    args = parser.parse_args()
+    port = args.port
+    app.run(host='localhost', port=port)
 
 
 
